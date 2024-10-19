@@ -16,10 +16,6 @@ Methodology:
 
     Use tools like FeroxBuster and wordlists (e.g., Seclists) to perform a comprehensive subdomain enumeration for deeper discovery of hidden assets.
 
-4. TRACE Method for Server Behavior Analysis:
-
-    Use the TRACE method to identify inappropriate behavior by inspecting changes in server requests. This can help detect misconfigurations or unauthorized access to restricted pages.
-
-5. Check for Exposed .git Files:
+4. Check for Exposed .git Files:
 
     Look for exposed .git files on websites, as these files may reveal previous version changes, potentially exposing sensitive information or exploitable vulnerabilities.
