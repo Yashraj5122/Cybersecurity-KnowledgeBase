@@ -1,0 +1,41 @@
+What is Path Traversal Broken Access Control?
+
+Path traversal is also known as directory traversal. These vulnerabilities enable an attacker to read arbitrary files on the server that is running an application. This might include:
+
+    Application code and data.
+    Credentials for back-end systems.
+    Sensitive operating system files.
+
+In some cases, an attacker might be able to write to arbitrary files on the server, allowing them to modify application data or behavior, and ultimately take full control of the server.
+
+
+Note:
+Verify if assets such as PDFs or photos within a web folder can be accessed by modifying their parameters in the URL. If this is possible, it may indicate a vulnerability in the system.
+
+Methodology:
+1. Filepath Vulnerability Check:
+
+    Investigate common filepaths such as /etc/passwd in the parameters related to photos or other assets. If these are accessible, it's indicative of a vulnerability.
+
+2. Relative Path Insertion:
+
+    If using an absolute path doesn't work, attempt to insert a relative path like ../../../../etc/passwd to bypass the directory structure.
+
+3. Filter Evasion with Extra Characters:
+
+    If relative paths also fail, filtering might be in place. Try bypassing the filter by adding extra slashes or other methods, e.g., ....//....//....//etc/passwd.
+
+4. Null Byte Injection for File Extension Restrictions:
+
+    In cases where the parameter restricts file extensions to .jpg or .pdf, use a null byte injection technique. For example, ../../../../etc/passwd%00.jpg. The null byte truncates the command, allowing the file path to bypass the filter while complying with the allowed file extensions.
+
+5. URL Encoding for Advanced Filters:
+
+    If all previous methods fail, the web application may have advanced filters. Use URL encoding for slashes to bypass these filters. For instance:
+        Normal Path: ../../../../etc/passwd
+        Single Encoding: ..%2f..%2f..%2f..%2fetc/passwd
+        Double Encoding: ..%25%32%66..%25%32%66..%25%32%66..%25%32%66etc/passwd
+
+6. Combination of Methods:
+
+    If no single technique works, combine and apply these methods in various combinations to achieve the desired result.
